@@ -13,5 +13,13 @@
   "license": "ISC",
   "bin": {
     "snippet": "./index.js"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "co": "^4.6.0",
+    "co-prompt": "^1.0.0",
+    "commander": "^2.15.1",
+    "openweather-apis": "^3.3.5",
+    "openweathermap-node": "^1.1.2"
   }
 }
