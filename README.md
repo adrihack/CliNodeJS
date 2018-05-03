@@ -6,9 +6,9 @@ Le but est de récupérer des données d'une **API** (openweather) et de les uti
 (Command Line interface). Ce projet n'est pas un projet fini et nécéssite des améliorations.
 
 ## Installation
-###Récupération des fichiers
+### Récupération des fichiers
 > git clone https://github.com/adrihack/CliNodeJS
-###Execution des scripts
+### Execution des scripts
 > cd CliNodeJS &&  npm init && npm install -g
 
 ## Utilisation
