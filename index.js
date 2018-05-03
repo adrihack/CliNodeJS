@@ -4,15 +4,7 @@
 const program = require('commander');
 const axios = require('axios');
 const weather = require('openweather-apis');
-// const inquirer = require('inquierer');
-
-
-var readline = require('linebyline'),
-    rl = readline('./cities.txt');
-rl.on('line', function(line, lineCount, byteCount) {
-    })
-    .on('error', function(e) {
-    });
+const inquirer = require('inquirer');
 
 
     weather.setLang('pl');
@@ -27,33 +19,39 @@ rl.on('line', function(line, lineCount, byteCount) {
   .option('-tc, --temperatureCelcius <temperature>', 'print temperature °C')
   .option('-tf, --temperatureFarenheit <temperature>', 'print temperature °F')
   .option('-p, --pressure <pressure>', 'print the athmospheric pressure' )
-  .option('-H --humidity <humidity>', 'print humidity of the air')
+  .option('-H --humidity <humidity>', 'print humidity of the air');
+  program.parse(process.argv);
+
+// return inquirer.prompt([{
+//  }]).then((city));
+
+ //var prompt = inquirer.createPromptModule();
+ //prompt(questions).then(city);
 
 
-   // inquirer.prompt([{
-   //     type: 'input',
-   //     message: 'entrez le nom de la ville',
-   //     name:'test input'
-   // }]).then((city))
+var questions = [
+    {
+        type: 'input',
+        message: 'entrez le nom de la ville',
+        name:'city'
+    }];
 
 
-   .action(function(){
-       axios.get('https://openweathermap.org')
-   })
-
-   .action(function(toto){
-       axios.get('http://samples.openweathermap.org/data/2.5/weather?q='+rl+'&appid='+ weather.getAPPID())
+   if(program.city){
+       inquirer.prompt(questions).then(answers => {
+           console.log(JSON.stringify(answers, null, '  '));
+       });
+       axios.get('http://samples.openweathermap.org/data/2.5/weather?q='+questions.name+'&appid='+ weather.getAPPID())
            .then(function (response) {
-               console.log('In '+response.data.name + ' the temperature is ' + response.data.main.temp + ' °F');
-           })
-   })
-
-   .action(function(humidity){
-       axios.get('http://samples.openweathermap.org/data/2.5/weather?q=London&appid='+ weather.getAPPID())
-           .then(function (response) {
-               console.log('The humidity is ' + response.data.main.humidity +' %');
-           })
-   })
+               console.log('In '+response.data.name + ' the temperature is ' + response.data.main.temp + ' °F');})
+   }
 
 
-  .parse(process.argv);
+ //  .action(function(humidity){
+ //      axios.get('http://samples.openweathermap.org/data/2.5/weather?q=London&appid='+ weather.getAPPID())
+ //          .then(function (response) {
+ //              console.log('The humidity is ' + response.data.main.humidity +' %');
+ //          })
+ //  });
+//
+
